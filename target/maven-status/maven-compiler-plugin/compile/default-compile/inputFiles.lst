@@ -1,0 +1,10 @@
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\BankApplication.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\entity\AppUser.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\entity\Card.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\entity\CardStatus.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\entity\Role.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\entity\Transfer.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\repository\AppUserRepository.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\repository\CardRepository.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\repository\TransferRepository.java
+C:\rubbish\test_bank\bank_rest\src\main\java\com\example\bankcards\security\SecurityConfig.java
