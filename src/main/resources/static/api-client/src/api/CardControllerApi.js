@@ -133,17 +133,12 @@ export default class CardControllerApi {
      */
 
     /**
-     * @param {Number} userId 
      * @param {module:model/Pageable} pageable 
      * @param {module:api/CardControllerApi~listCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/PageCardResponse}
      */
-    list(userId, pageable, callback) {
+    list(pageable, callback) {
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling list");
-      }
       // verify the required parameter 'pageable' is set
       if (pageable === undefined || pageable === null) {
         throw new Error("Missing the required parameter 'pageable' when calling list");
@@ -152,7 +147,6 @@ export default class CardControllerApi {
       let pathParams = {
       };
       let queryParams = {
-        'userId': userId,
         'pageable': pageable
       };
       let headerParams = {

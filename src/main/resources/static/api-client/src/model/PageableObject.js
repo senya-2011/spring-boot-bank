@@ -48,8 +48,11 @@ class PageableObject {
         if (data) {
             obj = obj || new PageableObject();
 
-            if (data.hasOwnProperty('paged')) {
-                obj['paged'] = ApiClient.convertToType(data['paged'], 'Boolean');
+            if (data.hasOwnProperty('offset')) {
+                obj['offset'] = ApiClient.convertToType(data['offset'], 'Number');
+            }
+            if (data.hasOwnProperty('sort')) {
+                obj['sort'] = ApiClient.convertToType(data['sort'], [SortObject]);
             }
             if (data.hasOwnProperty('pageNumber')) {
                 obj['pageNumber'] = ApiClient.convertToType(data['pageNumber'], 'Number');
@@ -57,14 +60,11 @@ class PageableObject {
             if (data.hasOwnProperty('pageSize')) {
                 obj['pageSize'] = ApiClient.convertToType(data['pageSize'], 'Number');
             }
+            if (data.hasOwnProperty('paged')) {
+                obj['paged'] = ApiClient.convertToType(data['paged'], 'Boolean');
+            }
             if (data.hasOwnProperty('unpaged')) {
                 obj['unpaged'] = ApiClient.convertToType(data['unpaged'], 'Boolean');
-            }
-            if (data.hasOwnProperty('offset')) {
-                obj['offset'] = ApiClient.convertToType(data['offset'], 'Number');
-            }
-            if (data.hasOwnProperty('sort')) {
-                obj['sort'] = ApiClient.convertToType(data['sort'], [SortObject]);
             }
         }
         return obj;
@@ -96,9 +96,14 @@ class PageableObject {
 
 
 /**
- * @member {Boolean} paged
+ * @member {Number} offset
  */
-PageableObject.prototype['paged'] = undefined;
+PageableObject.prototype['offset'] = undefined;
+
+/**
+ * @member {Array.<module:model/SortObject>} sort
+ */
+PageableObject.prototype['sort'] = undefined;
 
 /**
  * @member {Number} pageNumber
@@ -111,19 +116,14 @@ PageableObject.prototype['pageNumber'] = undefined;
 PageableObject.prototype['pageSize'] = undefined;
 
 /**
+ * @member {Boolean} paged
+ */
+PageableObject.prototype['paged'] = undefined;
+
+/**
  * @member {Boolean} unpaged
  */
 PageableObject.prototype['unpaged'] = undefined;
-
-/**
- * @member {Number} offset
- */
-PageableObject.prototype['offset'] = undefined;
-
-/**
- * @member {Array.<module:model/SortObject>} sort
- */
-PageableObject.prototype['sort'] = undefined;
 
 
 

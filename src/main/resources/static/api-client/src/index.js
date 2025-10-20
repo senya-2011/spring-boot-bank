@@ -16,11 +16,13 @@ import ApiClient from './ApiClient';
 import CardCreateRequest from './model/CardCreateRequest';
 import CardResponse from './model/CardResponse';
 import CardUpdateStatusRequest from './model/CardUpdateStatusRequest';
+import LoginRequest from './model/LoginRequest';
 import PageCardResponse from './model/PageCardResponse';
 import Pageable from './model/Pageable';
 import PageableObject from './model/PageableObject';
 import SortObject from './model/SortObject';
 import TransferRequest from './model/TransferRequest';
+import AuthControllerApi from './api/AuthControllerApi';
 import CardControllerApi from './api/CardControllerApi';
 import TransferControllerApi from './api/TransferControllerApi';
 
@@ -82,6 +84,12 @@ export {
     CardUpdateStatusRequest,
 
     /**
+     * The LoginRequest model constructor.
+     * @property {module:model/LoginRequest}
+     */
+    LoginRequest,
+
+    /**
      * The PageCardResponse model constructor.
      * @property {module:model/PageCardResponse}
      */
@@ -110,6 +118,12 @@ export {
      * @property {module:model/TransferRequest}
      */
     TransferRequest,
+
+    /**
+    * The AuthControllerApi service constructor.
+    * @property {module:api/AuthControllerApi}
+    */
+    AuthControllerApi,
 
     /**
     * The CardControllerApi service constructor.

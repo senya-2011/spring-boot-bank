@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## transfer
 
-> transfer(userId, transferRequest)
+> transfer(transferRequest)
 
 
 
@@ -20,9 +20,8 @@ Method | HTTP request | Description
 import OpenApiDefinition from 'open_api_definition';
 
 let apiInstance = new OpenApiDefinition.TransferControllerApi();
-let userId = 789; // Number | 
 let transferRequest = new OpenApiDefinition.TransferRequest(); // TransferRequest | 
-apiInstance.transfer(userId, transferRequest, (error, data, response) => {
+apiInstance.transfer(transferRequest, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -36,7 +35,6 @@ apiInstance.transfer(userId, transferRequest, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **Number**|  | 
  **transferRequest** | [**TransferRequest**](TransferRequest.md)|  | 
 
 ### Return type

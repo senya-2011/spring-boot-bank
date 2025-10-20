@@ -50,23 +50,20 @@ class PageCardResponse {
         if (data) {
             obj = obj || new PageCardResponse();
 
-            if (data.hasOwnProperty('totalElements')) {
-                obj['totalElements'] = ApiClient.convertToType(data['totalElements'], 'Number');
-            }
             if (data.hasOwnProperty('totalPages')) {
                 obj['totalPages'] = ApiClient.convertToType(data['totalPages'], 'Number');
             }
-            if (data.hasOwnProperty('numberOfElements')) {
-                obj['numberOfElements'] = ApiClient.convertToType(data['numberOfElements'], 'Number');
-            }
-            if (data.hasOwnProperty('pageable')) {
-                obj['pageable'] = PageableObject.constructFromObject(data['pageable']);
+            if (data.hasOwnProperty('totalElements')) {
+                obj['totalElements'] = ApiClient.convertToType(data['totalElements'], 'Number');
             }
             if (data.hasOwnProperty('first')) {
                 obj['first'] = ApiClient.convertToType(data['first'], 'Boolean');
             }
             if (data.hasOwnProperty('last')) {
                 obj['last'] = ApiClient.convertToType(data['last'], 'Boolean');
+            }
+            if (data.hasOwnProperty('numberOfElements')) {
+                obj['numberOfElements'] = ApiClient.convertToType(data['numberOfElements'], 'Number');
             }
             if (data.hasOwnProperty('size')) {
                 obj['size'] = ApiClient.convertToType(data['size'], 'Number');
@@ -79,6 +76,9 @@ class PageCardResponse {
             }
             if (data.hasOwnProperty('sort')) {
                 obj['sort'] = ApiClient.convertToType(data['sort'], [SortObject]);
+            }
+            if (data.hasOwnProperty('pageable')) {
+                obj['pageable'] = PageableObject.constructFromObject(data['pageable']);
             }
             if (data.hasOwnProperty('empty')) {
                 obj['empty'] = ApiClient.convertToType(data['empty'], 'Boolean');
@@ -93,10 +93,6 @@ class PageCardResponse {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PageCardResponse</code>.
      */
     static validateJSON(data) {
-        // validate the optional field `pageable`
-        if (data['pageable']) { // data not null
-          PageableObject.validateJSON(data['pageable']);
-        }
         if (data['content']) { // data not null
             // ensure the json data is an array
             if (!Array.isArray(data['content'])) {
@@ -117,6 +113,10 @@ class PageCardResponse {
                 SortObject.validateJSON(item);
             };
         }
+        // validate the optional field `pageable`
+        if (data['pageable']) { // data not null
+          PageableObject.validateJSON(data['pageable']);
+        }
 
         return true;
     }
@@ -127,24 +127,14 @@ class PageCardResponse {
 
 
 /**
- * @member {Number} totalElements
- */
-PageCardResponse.prototype['totalElements'] = undefined;
-
-/**
  * @member {Number} totalPages
  */
 PageCardResponse.prototype['totalPages'] = undefined;
 
 /**
- * @member {Number} numberOfElements
+ * @member {Number} totalElements
  */
-PageCardResponse.prototype['numberOfElements'] = undefined;
-
-/**
- * @member {module:model/PageableObject} pageable
- */
-PageCardResponse.prototype['pageable'] = undefined;
+PageCardResponse.prototype['totalElements'] = undefined;
 
 /**
  * @member {Boolean} first
@@ -155,6 +145,11 @@ PageCardResponse.prototype['first'] = undefined;
  * @member {Boolean} last
  */
 PageCardResponse.prototype['last'] = undefined;
+
+/**
+ * @member {Number} numberOfElements
+ */
+PageCardResponse.prototype['numberOfElements'] = undefined;
 
 /**
  * @member {Number} size
@@ -175,6 +170,11 @@ PageCardResponse.prototype['number'] = undefined;
  * @member {Array.<module:model/SortObject>} sort
  */
 PageCardResponse.prototype['sort'] = undefined;
+
+/**
+ * @member {module:model/PageableObject} pageable
+ */
+PageCardResponse.prototype['pageable'] = undefined;
 
 /**
  * @member {Boolean} empty

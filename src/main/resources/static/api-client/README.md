@@ -102,16 +102,16 @@ Please follow the [installation](#installation) instruction and execute the foll
 var OpenApiDefinition = require('open_api_definition');
 
 
-var api = new OpenApiDefinition.CardControllerApi()
-var cardId = 789; // {Number} 
+var api = new OpenApiDefinition.AuthControllerApi()
+var loginRequest = new OpenApiDefinition.LoginRequest(); // {LoginRequest} 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.callDelete(cardId, callback);
+api.login(loginRequest, callback);
 
 ```
 
@@ -121,6 +121,7 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*OpenApiDefinition.AuthControllerApi* | [**login**](docs/AuthControllerApi.md#login) | **POST** /api/auth/login | 
 *OpenApiDefinition.CardControllerApi* | [**callDelete**](docs/CardControllerApi.md#callDelete) | **DELETE** /api/cards/{cardId} | 
 *OpenApiDefinition.CardControllerApi* | [**create**](docs/CardControllerApi.md#create) | **POST** /api/cards | 
 *OpenApiDefinition.CardControllerApi* | [**list**](docs/CardControllerApi.md#list) | **GET** /api/cards | 
@@ -133,6 +134,7 @@ Class | Method | HTTP request | Description
  - [OpenApiDefinition.CardCreateRequest](docs/CardCreateRequest.md)
  - [OpenApiDefinition.CardResponse](docs/CardResponse.md)
  - [OpenApiDefinition.CardUpdateStatusRequest](docs/CardUpdateStatusRequest.md)
+ - [OpenApiDefinition.LoginRequest](docs/LoginRequest.md)
  - [OpenApiDefinition.PageCardResponse](docs/PageCardResponse.md)
  - [OpenApiDefinition.Pageable](docs/Pageable.md)
  - [OpenApiDefinition.PageableObject](docs/PageableObject.md)

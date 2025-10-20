@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**totalElements** | **Number** |  | [optional] 
 **totalPages** | **Number** |  | [optional] 
-**numberOfElements** | **Number** |  | [optional] 
-**pageable** | [**PageableObject**](PageableObject.md) |  | [optional] 
+**totalElements** | **Number** |  | [optional] 
 **first** | **Boolean** |  | [optional] 
 **last** | **Boolean** |  | [optional] 
+**numberOfElements** | **Number** |  | [optional] 
 **size** | **Number** |  | [optional] 
 **content** | [**[CardResponse]**](CardResponse.md) |  | [optional] 
 **number** | **Number** |  | [optional] 
 **sort** | [**[SortObject]**](SortObject.md) |  | [optional] 
+**pageable** | [**PageableObject**](PageableObject.md) |  | [optional] 
 **empty** | **Boolean** |  | [optional] 
 
 

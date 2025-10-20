@@ -13,18 +13,18 @@
 
 
 import ApiClient from "../ApiClient";
-import TransferRequest from '../model/TransferRequest';
+import LoginRequest from '../model/LoginRequest';
 
 /**
-* TransferController service.
-* @module api/TransferControllerApi
+* AuthController service.
+* @module api/AuthControllerApi
 * @version v0
 */
-export default class TransferControllerApi {
+export default class AuthControllerApi {
 
     /**
-    * Constructs a new TransferControllerApi. 
-    * @alias module:api/TransferControllerApi
+    * Constructs a new AuthControllerApi. 
+    * @alias module:api/AuthControllerApi
     * @class
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
@@ -35,22 +35,23 @@ export default class TransferControllerApi {
 
 
     /**
-     * Callback function to receive the result of the transfer operation.
-     * @callback module:api/TransferControllerApi~transferCallback
+     * Callback function to receive the result of the login operation.
+     * @callback module:api/AuthControllerApi~loginCallback
      * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
+     * @param {Object} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * @param {module:model/TransferRequest} transferRequest 
-     * @param {module:api/TransferControllerApi~transferCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:model/LoginRequest} loginRequest 
+     * @param {module:api/AuthControllerApi~loginCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
      */
-    transfer(transferRequest, callback) {
-      let postBody = transferRequest;
-      // verify the required parameter 'transferRequest' is set
-      if (transferRequest === undefined || transferRequest === null) {
-        throw new Error("Missing the required parameter 'transferRequest' when calling transfer");
+    login(loginRequest, callback) {
+      let postBody = loginRequest;
+      // verify the required parameter 'loginRequest' is set
+      if (loginRequest === undefined || loginRequest === null) {
+        throw new Error("Missing the required parameter 'loginRequest' when calling login");
       }
 
       let pathParams = {
@@ -64,10 +65,10 @@ export default class TransferControllerApi {
 
       let authNames = [];
       let contentTypes = ['application/json'];
-      let accepts = [];
-      let returnType = null;
+      let accepts = ['*/*'];
+      let returnType = Object;
       return this.apiClient.callApi(
-        '/api/transfers', 'POST',
+        '/api/auth/login', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

@@ -101,7 +101,7 @@ No authorization required
 
 ## list
 
-> PageCardResponse list(userId, pageable)
+> PageCardResponse list(pageable)
 
 
 
@@ -111,9 +111,8 @@ No authorization required
 import OpenApiDefinition from 'open_api_definition';
 
 let apiInstance = new OpenApiDefinition.CardControllerApi();
-let userId = 789; // Number | 
 let pageable = new OpenApiDefinition.Pageable(); // Pageable | 
-apiInstance.list(userId, pageable, (error, data, response) => {
+apiInstance.list(pageable, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -127,7 +126,6 @@ apiInstance.list(userId, pageable, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **Number**|  | 
  **pageable** | [**Pageable**](.md)|  | 
 
 ### Return type

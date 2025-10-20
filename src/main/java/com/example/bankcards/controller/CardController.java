@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +26,7 @@ public class CardController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CardResponse> create(@RequestParam Long userId,
                                                @Valid @RequestBody CardCreateRequest request) {
         AppUser user = userRepository.findById(userId).orElseThrow();
@@ -31,18 +34,21 @@ public class CardController {
     }
 
     @PatchMapping("/{cardId}/status")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CardResponse> updateStatus(@PathVariable Long cardId,
                                                      @Valid @RequestBody CardUpdateStatusRequest request) {
         return ResponseEntity.ok(cardService.updateStatus(cardId, request));
     }
 
     @GetMapping
-    public ResponseEntity<Page<CardResponse>> list(@RequestParam Long userId, Pageable pageable) {
-        AppUser user = userRepository.findById(userId).orElseThrow();
+    public ResponseEntity<Page<CardResponse>> list(Pageable pageable) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        AppUser user = userRepository.findByUsername(username).orElseThrow();
         return ResponseEntity.ok(cardService.listForUser(user, pageable));
     }
 
     @DeleteMapping("/{cardId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long cardId) {
         return ResponseEntity.noContent().build();
     }

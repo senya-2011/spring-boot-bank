@@ -19,7 +19,7 @@ public class TransferService {
         this.cardRepository = cardRepository;
     }
 
-    public void transferBetweenOwnCards(Long userId, TransferRequest request) {
+    public void transferBetweenOwnCards(String username, TransferRequest request) {
         if (request.getFromCardId().equals(request.getToCardId())) {
             throw new SameCardTransferException("Source and destination cards must be different");
         }
@@ -27,7 +27,7 @@ public class TransferService {
             .orElseThrow(() -> new CardNotFoundException("Card not found: " + request.getFromCardId()));
         Card to = cardRepository.findById(request.getToCardId())
             .orElseThrow(() -> new CardNotFoundException("Card not found: " + request.getToCardId()));
-        if (!from.getUser().getId().equals(userId) || !to.getUser().getId().equals(userId)) {
+        if (!from.getUser().getUsername().equals(username) || !to.getUser().getUsername().equals(username)) {
             throw new CardsOwnershipException("Both cards must belong to the same user");
         }
         if (from.getBalanceMinor() < request.getAmountMinor()) {
