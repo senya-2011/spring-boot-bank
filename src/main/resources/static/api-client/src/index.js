@@ -20,10 +20,12 @@ import LoginRequest from './model/LoginRequest';
 import PageCardResponse from './model/PageCardResponse';
 import Pageable from './model/Pageable';
 import PageableObject from './model/PageableObject';
+import RegisterRequest from './model/RegisterRequest';
 import SortObject from './model/SortObject';
 import TransferRequest from './model/TransferRequest';
 import AuthControllerApi from './api/AuthControllerApi';
 import CardControllerApi from './api/CardControllerApi';
+import CardRequestControllerApi from './api/CardRequestControllerApi';
 import TransferControllerApi from './api/TransferControllerApi';
 
 
@@ -108,6 +110,12 @@ export {
     PageableObject,
 
     /**
+     * The RegisterRequest model constructor.
+     * @property {module:model/RegisterRequest}
+     */
+    RegisterRequest,
+
+    /**
      * The SortObject model constructor.
      * @property {module:model/SortObject}
      */
@@ -130,6 +138,12 @@ export {
     * @property {module:api/CardControllerApi}
     */
     CardControllerApi,
+
+    /**
+    * The CardRequestControllerApi service constructor.
+    * @property {module:api/CardRequestControllerApi}
+    */
+    CardRequestControllerApi,
 
     /**
     * The TransferControllerApi service constructor.

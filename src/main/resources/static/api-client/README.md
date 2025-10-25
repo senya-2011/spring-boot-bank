@@ -122,10 +122,12 @@ All URIs are relative to *http://localhost:8080*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OpenApiDefinition.AuthControllerApi* | [**login**](docs/AuthControllerApi.md#login) | **POST** /api/auth/login | 
+*OpenApiDefinition.AuthControllerApi* | [**register**](docs/AuthControllerApi.md#register) | **POST** /api/auth/register | 
 *OpenApiDefinition.CardControllerApi* | [**callDelete**](docs/CardControllerApi.md#callDelete) | **DELETE** /api/cards/{cardId} | 
 *OpenApiDefinition.CardControllerApi* | [**create**](docs/CardControllerApi.md#create) | **POST** /api/cards | 
 *OpenApiDefinition.CardControllerApi* | [**list**](docs/CardControllerApi.md#list) | **GET** /api/cards | 
 *OpenApiDefinition.CardControllerApi* | [**updateStatus**](docs/CardControllerApi.md#updateStatus) | **PATCH** /api/cards/{cardId}/status | 
+*OpenApiDefinition.CardRequestControllerApi* | [**requestCardBlock**](docs/CardRequestControllerApi.md#requestCardBlock) | **POST** /api/card-requests/block/{cardId} | 
 *OpenApiDefinition.TransferControllerApi* | [**transfer**](docs/TransferControllerApi.md#transfer) | **POST** /api/transfers | 
 
 
@@ -138,6 +140,7 @@ Class | Method | HTTP request | Description
  - [OpenApiDefinition.PageCardResponse](docs/PageCardResponse.md)
  - [OpenApiDefinition.Pageable](docs/Pageable.md)
  - [OpenApiDefinition.PageableObject](docs/PageableObject.md)
+ - [OpenApiDefinition.RegisterRequest](docs/RegisterRequest.md)
  - [OpenApiDefinition.SortObject](docs/SortObject.md)
  - [OpenApiDefinition.TransferRequest](docs/TransferRequest.md)
 

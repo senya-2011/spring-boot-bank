@@ -14,6 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import LoginRequest from '../model/LoginRequest';
+import RegisterRequest from '../model/RegisterRequest';
 
 /**
 * AuthController service.
@@ -69,6 +70,46 @@ export default class AuthControllerApi {
       let returnType = Object;
       return this.apiClient.callApi(
         '/api/auth/login', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the register operation.
+     * @callback module:api/AuthControllerApi~registerCallback
+     * @param {String} error Error message, if any.
+     * @param {Object} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {module:model/RegisterRequest} registerRequest 
+     * @param {module:api/AuthControllerApi~registerCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
+     */
+    register(registerRequest, callback) {
+      let postBody = registerRequest;
+      // verify the required parameter 'registerRequest' is set
+      if (registerRequest === undefined || registerRequest === null) {
+        throw new Error("Missing the required parameter 'registerRequest' when calling register");
+      }
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = ['application/json'];
+      let accepts = ['*/*'];
+      let returnType = Object;
+      return this.apiClient.callApi(
+        '/api/auth/register', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

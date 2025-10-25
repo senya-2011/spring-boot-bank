@@ -1,6 +1,7 @@
 package com.example.bankcards.service;
 
 import com.example.bankcards.dto.CardCreateRequest;
+import com.example.bankcards.exception.CardNotFoundException;
 import com.example.bankcards.dto.CardResponse;
 import com.example.bankcards.dto.CardUpdateStatusRequest;
 import com.example.bankcards.entity.AppUser;
@@ -46,6 +47,13 @@ public class CardService {
     @Transactional(readOnly = true)
     public Page<CardResponse> listForUser(AppUser user, Pageable pageable) {
         return cardRepository.findByUser(user, pageable).map(this::toResponse);
+    }
+
+    public void deleteCard(Long cardId) {
+        if (!cardRepository.existsById(cardId)) {
+            throw new CardNotFoundException("Card not found: " + cardId);
+        }
+        cardRepository.deleteById(cardId);
     }
 
     private CardResponse toResponse(Card card) {

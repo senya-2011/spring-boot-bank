@@ -50,6 +50,7 @@ public class CardController {
     @DeleteMapping("/{cardId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long cardId) {
+        cardService.deleteCard(cardId);
         return ResponseEntity.noContent().build();
     }
 }

@@ -50,20 +50,11 @@ class PageCardResponse {
         if (data) {
             obj = obj || new PageCardResponse();
 
-            if (data.hasOwnProperty('totalPages')) {
-                obj['totalPages'] = ApiClient.convertToType(data['totalPages'], 'Number');
-            }
             if (data.hasOwnProperty('totalElements')) {
                 obj['totalElements'] = ApiClient.convertToType(data['totalElements'], 'Number');
             }
-            if (data.hasOwnProperty('first')) {
-                obj['first'] = ApiClient.convertToType(data['first'], 'Boolean');
-            }
-            if (data.hasOwnProperty('last')) {
-                obj['last'] = ApiClient.convertToType(data['last'], 'Boolean');
-            }
-            if (data.hasOwnProperty('numberOfElements')) {
-                obj['numberOfElements'] = ApiClient.convertToType(data['numberOfElements'], 'Number');
+            if (data.hasOwnProperty('totalPages')) {
+                obj['totalPages'] = ApiClient.convertToType(data['totalPages'], 'Number');
             }
             if (data.hasOwnProperty('size')) {
                 obj['size'] = ApiClient.convertToType(data['size'], 'Number');
@@ -77,8 +68,17 @@ class PageCardResponse {
             if (data.hasOwnProperty('sort')) {
                 obj['sort'] = ApiClient.convertToType(data['sort'], [SortObject]);
             }
+            if (data.hasOwnProperty('numberOfElements')) {
+                obj['numberOfElements'] = ApiClient.convertToType(data['numberOfElements'], 'Number');
+            }
             if (data.hasOwnProperty('pageable')) {
                 obj['pageable'] = PageableObject.constructFromObject(data['pageable']);
+            }
+            if (data.hasOwnProperty('first')) {
+                obj['first'] = ApiClient.convertToType(data['first'], 'Boolean');
+            }
+            if (data.hasOwnProperty('last')) {
+                obj['last'] = ApiClient.convertToType(data['last'], 'Boolean');
             }
             if (data.hasOwnProperty('empty')) {
                 obj['empty'] = ApiClient.convertToType(data['empty'], 'Boolean');
@@ -127,29 +127,14 @@ class PageCardResponse {
 
 
 /**
- * @member {Number} totalPages
- */
-PageCardResponse.prototype['totalPages'] = undefined;
-
-/**
  * @member {Number} totalElements
  */
 PageCardResponse.prototype['totalElements'] = undefined;
 
 /**
- * @member {Boolean} first
+ * @member {Number} totalPages
  */
-PageCardResponse.prototype['first'] = undefined;
-
-/**
- * @member {Boolean} last
- */
-PageCardResponse.prototype['last'] = undefined;
-
-/**
- * @member {Number} numberOfElements
- */
-PageCardResponse.prototype['numberOfElements'] = undefined;
+PageCardResponse.prototype['totalPages'] = undefined;
 
 /**
  * @member {Number} size
@@ -172,9 +157,24 @@ PageCardResponse.prototype['number'] = undefined;
 PageCardResponse.prototype['sort'] = undefined;
 
 /**
+ * @member {Number} numberOfElements
+ */
+PageCardResponse.prototype['numberOfElements'] = undefined;
+
+/**
  * @member {module:model/PageableObject} pageable
  */
 PageCardResponse.prototype['pageable'] = undefined;
+
+/**
+ * @member {Boolean} first
+ */
+PageCardResponse.prototype['first'] = undefined;
+
+/**
+ * @member {Boolean} last
+ */
+PageCardResponse.prototype['last'] = undefined;
 
 /**
  * @member {Boolean} empty

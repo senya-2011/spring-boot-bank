@@ -5,12 +5,14 @@ README.md
 docs/AuthControllerApi.md
 docs/CardControllerApi.md
 docs/CardCreateRequest.md
+docs/CardRequestControllerApi.md
 docs/CardResponse.md
 docs/CardUpdateStatusRequest.md
 docs/LoginRequest.md
 docs/PageCardResponse.md
 docs/Pageable.md
 docs/PageableObject.md
+docs/RegisterRequest.md
 docs/SortObject.md
 docs/TransferControllerApi.md
 docs/TransferRequest.md
@@ -20,6 +22,7 @@ package.json
 src/ApiClient.js
 src/api/AuthControllerApi.js
 src/api/CardControllerApi.js
+src/api/CardRequestControllerApi.js
 src/api/TransferControllerApi.js
 src/index.js
 src/model/CardCreateRequest.js
@@ -29,7 +32,8 @@ src/model/LoginRequest.js
 src/model/PageCardResponse.js
 src/model/Pageable.js
 src/model/PageableObject.js
+src/model/RegisterRequest.js
 src/model/SortObject.js
 src/model/TransferRequest.js
-test/api/AuthControllerApi.spec.js
-test/model/LoginRequest.spec.js
+test/api/CardRequestControllerApi.spec.js
+test/model/RegisterRequest.spec.js

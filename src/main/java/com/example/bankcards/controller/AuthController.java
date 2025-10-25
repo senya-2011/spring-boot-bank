@@ -1,6 +1,7 @@
 package com.example.bankcards.controller;
 
 import com.example.bankcards.entity.AppUser;
+import com.example.bankcards.entity.Role;
 import com.example.bankcards.repository.AppUserRepository;
 import com.example.bankcards.security.JwtService;
 import jakarta.validation.constraints.NotBlank;
@@ -24,6 +25,7 @@ public class AuthController {
     }
 
     public record LoginRequest(@NotBlank String username, @NotBlank String password) {}
+    public record RegisterRequest(@NotBlank String username, @NotBlank String password, Role role) {}
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
@@ -33,6 +35,23 @@ public class AuthController {
         }
         String token = jwtService.generateToken(user.getUsername(), user.getRole().name());
         return ResponseEntity.ok(Map.of("token", token));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        if (userRepository.findByUsername(request.username()).isPresent()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Username already exists"));
+        }
+        
+        AppUser user = AppUser.builder()
+                .username(request.username())
+                .passwordHash(passwordEncoder.encode(request.password()))
+                .role(request.role())
+                .enabled(true)
+                .build();
+        
+        userRepository.save(user);
+        return ResponseEntity.ok(Map.of("message", "User registered successfully"));
     }
 }
 

@@ -33,12 +33,18 @@ public class SecurityConfig {
                     "/swagger-ui/**",
                     "/swagger-ui.html",
                     "/actuator/**",
-                    "/api/auth/**"
+                    "/api/auth/**",
+                    "/",
+                    "/index.html",
+                    "/static/**",
+                    "/css/**",
+                    "/js/**",
+                    "/images/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form.disable())
-            .httpBasic(Customizer.withDefaults())
+            .httpBasic(basic -> basic.disable())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
