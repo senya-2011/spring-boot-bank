@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-test-data
+      author: system
+      changes:
+        - insert:
+            tableName: app_user
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: password_hash
+                  value: $2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+              - column:
+                  name: role
+                  value: ADMIN
+              - column:
+                  name: enabled
+                  valueBoolean: true
+        - insert:
+            tableName: app_user
+            columns:
+              - column:
+                  name: username
+                  value: user1
+              - column:
+                  name: password_hash
+                  value: $2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
+              - column:
+                  name: role
+                  value: USER
+              - column:
+                  name: enabled
+                  valueBoolean: true

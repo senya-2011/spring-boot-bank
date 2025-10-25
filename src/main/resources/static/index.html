@@ -1,0 +1,441 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bank Cards Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .form-group { margin: 10px 0; }
+        label { display: block; margin-bottom: 5px; }
+        input, select, button { padding: 8px; margin: 5px 0; width: 200px; }
+        button { background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .error { color: red; }
+        .success { color: green; }
+        .card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .hidden { display: none; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Cards Management System</h1>
+        
+        <!-- Login Section -->
+        <div class="section" id="loginSection">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" id="username" placeholder="admin or user1">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="password" placeholder="password">
+            </div>
+            <button onclick="login()">Login</button>
+            <button onclick="showRegister()">Register</button>
+            <div id="loginMessage"></div>
+        </div>
+
+        <!-- Register Section -->
+        <div class="section hidden" id="registerSection">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" id="regUsername" placeholder="newuser">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="regPassword" placeholder="password">
+            </div>
+            <div class="form-group">
+                <label>Role:</label>
+                <select id="regRole">
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </div>
+            <button onclick="register()">Register</button>
+            <button onclick="showLogin()">Back to Login</button>
+            <div id="registerMessage"></div>
+        </div>
+
+        <!-- Main App (hidden initially) -->
+        <div class="section hidden" id="mainApp">
+            <h2>Welcome, <span id="currentUser"></span>!</h2>
+            <button onclick="logout()">Logout</button>
+            
+            <!-- Admin Section -->
+            <div id="adminSection" class="hidden">
+                <h3>Admin Panel</h3>
+                
+                <!-- Create Card -->
+                <div class="section">
+                    <h4>Create Card</h4>
+                    <div class="form-group">
+                        <label>User ID:</label>
+                        <input type="number" id="createUserId" placeholder="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number:</label>
+                        <input type="text" id="createCardNumber" placeholder="4111111111111111">
+                    </div>
+                    <div class="form-group">
+                        <label>Owner Name:</label>
+                        <input type="text" id="createOwnerName" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Expiry Date:</label>
+                        <input type="date" id="createExpiry">
+                    </div>
+                    <div class="form-group">
+                        <label>Status:</label>
+                        <select id="createStatus">
+                            <option value="ACTIVE">Active</option>
+                            <option value="BLOCKED">Blocked</option>
+                            <option value="EXPIRED">Expired</option>
+                        </select>
+                    </div>
+                    <button onclick="createCard()">Create Card</button>
+                </div>
+
+                <!-- Update Card Status -->
+                <div class="section">
+                    <h4>Update Card Status</h4>
+                    <div class="form-group">
+                        <label>Card ID:</label>
+                        <input type="number" id="updateCardId" placeholder="1">
+                    </div>
+                    <div class="form-group">
+                        <label>New Status:</label>
+                        <select id="updateStatus">
+                            <option value="ACTIVE">Active</option>
+                            <option value="BLOCKED">Blocked</option>
+                            <option value="EXPIRED">Expired</option>
+                        </select>
+                    </div>
+                    <button onclick="updateCardStatus()">Update Status</button>
+                </div>
+
+                <!-- Delete Card -->
+                <div class="section">
+                    <h4>Delete Card</h4>
+                    <div class="form-group">
+                        <label>Card ID:</label>
+                        <input type="number" id="deleteCardId" placeholder="1">
+                    </div>
+                    <button onclick="deleteCard()">Delete Card</button>
+                </div>
+            </div>
+
+            <!-- User Section -->
+            <div id="userSection" class="hidden">
+                <h3>My Cards</h3>
+                <button onclick="loadMyCards()">Refresh Cards</button>
+                <div id="cardsList"></div>
+
+                <!-- Transfer Money -->
+                <div class="section">
+                    <h4>Transfer Money</h4>
+                    <div class="form-group">
+                        <label>From Card ID:</label>
+                        <input type="number" id="fromCardId" placeholder="1">
+                    </div>
+                    <div class="form-group">
+                        <label>To Card ID:</label>
+                        <input type="number" id="toCardId" placeholder="2">
+                    </div>
+                    <div class="form-group">
+                        <label>Amount (cents):</label>
+                        <input type="number" id="transferAmount" placeholder="100">
+                    </div>
+                    <button onclick="transferMoney()">Transfer</button>
+                </div>
+
+                <!-- Request Card Block -->
+                <div class="section">
+                    <h4>Request Card Block</h4>
+                    <div class="form-group">
+                        <label>Card ID:</label>
+                        <input type="number" id="blockCardId" placeholder="1">
+                    </div>
+                    <button onclick="requestCardBlock()">Request Block</button>
+                </div>
+            </div>
+
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        let token = null;
+        let currentUser = null;
+
+        // Login function
+        window.login = async function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    token = data.token;
+                    currentUser = username;
+                    
+                    document.getElementById('loginSection').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    document.getElementById('currentUser').textContent = username;
+                    
+                    // Show appropriate section based on user
+                    if (username === 'admin') {
+                        document.getElementById('adminSection').classList.remove('hidden');
+                    } else {
+                        document.getElementById('userSection').classList.remove('hidden');
+                        loadMyCards();
+                    }
+                } else {
+                    const error = await response.json();
+                    document.getElementById('loginMessage').innerHTML = `<div class="error">${error.message}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('loginMessage').innerHTML = `<div class="error">Login failed: ${error.message}</div>`;
+            }
+        };
+
+        // Logout function
+        window.logout = function() {
+            token = null;
+            currentUser = null;
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('registerSection').classList.add('hidden');
+            document.getElementById('adminSection').classList.add('hidden');
+            document.getElementById('userSection').classList.add('hidden');
+        };
+
+        // Show register form
+        window.showRegister = function() {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('registerSection').classList.remove('hidden');
+        };
+
+        // Show login form
+        window.showLogin = function() {
+            document.getElementById('registerSection').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+        };
+
+        // Register function
+        window.register = async function() {
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const role = document.getElementById('regRole').value;
+            
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, role })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('registerMessage').innerHTML = `<div class="success">${data.message}</div>`;
+                    showLogin();
+                } else {
+                    const error = await response.json();
+                    document.getElementById('registerMessage').innerHTML = `<div class="error">${error.message}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('registerMessage').innerHTML = `<div class="error">Registration failed: ${error.message}</div>`;
+            }
+        };
+
+        // Helper function to make authenticated requests
+        async function apiCall(url, options = {}) {
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+            
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+            
+            return fetch(url, { ...options, headers });
+        }
+
+        // Load user's cards
+        window.loadMyCards = async function() {
+            try {
+                const response = await apiCall('/api/cards');
+                const data = await response.json();
+                
+                let html = '<h4>My Cards:</h4><table><tr><th>ID</th><th>Card Number</th><th>Owner</th><th>Expiry</th><th>Status</th><th>Balance</th></tr>';
+                
+                data.content.forEach(card => {
+                    html += `<tr>
+                        <td>${card.id}</td>
+                        <td>${card.maskedCardNumber}</td>
+                        <td>${card.ownerName}</td>
+                        <td>${card.expiry}</td>
+                        <td>${card.status}</td>
+                        <td>${(card.balanceMinor / 100).toFixed(2)}</td>
+                    </tr>`;
+                });
+                
+                html += '</table>';
+                document.getElementById('cardsList').innerHTML = html;
+            } catch (error) {
+                showMessage(`Error loading cards: ${error.message}`, 'error');
+            }
+        };
+
+        // Create card (Admin only)
+        window.createCard = async function() {
+            const userId = document.getElementById('createUserId').value;
+            const cardNumber = document.getElementById('createCardNumber').value;
+            const ownerName = document.getElementById('createOwnerName').value;
+            const expiry = document.getElementById('createExpiry').value;
+            const status = document.getElementById('createStatus').value;
+            
+            try {
+                const response = await apiCall(`/api/cards?userId=${userId}`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        cardNumberPlain: cardNumber,
+                        ownerName: ownerName,
+                        expiry: expiry,
+                        status: status
+                    })
+                });
+                
+                if (response.ok) {
+                    showMessage('Card created successfully!', 'success');
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error creating card: ${error.message}`, 'error');
+            }
+        };
+
+        // Update card status (Admin only)
+        window.updateCardStatus = async function() {
+            const cardId = document.getElementById('updateCardId').value;
+            const status = document.getElementById('updateStatus').value;
+            
+            try {
+                const response = await apiCall(`/api/cards/${cardId}/status`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ status: status })
+                });
+                
+                if (response.ok) {
+                    showMessage('Card status updated successfully!', 'success');
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error updating card: ${error.message}`, 'error');
+            }
+        };
+
+        // Delete card (Admin only)
+        window.deleteCard = async function() {
+            const cardId = document.getElementById('deleteCardId').value;
+            
+            try {
+                const response = await apiCall(`/api/cards/${cardId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    showMessage('Card deleted successfully!', 'success');
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error deleting card: ${error.message}`, 'error');
+            }
+        };
+
+        // Transfer money
+        window.transferMoney = async function() {
+            const fromCardId = document.getElementById('fromCardId').value;
+            const toCardId = document.getElementById('toCardId').value;
+            const amount = document.getElementById('transferAmount').value;
+            
+            try {
+                const response = await apiCall('/api/transfers', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        fromCardId: parseInt(fromCardId),
+                        toCardId: parseInt(toCardId),
+                        amountMinor: parseInt(amount)
+                    })
+                });
+                
+                if (response.ok) {
+                    showMessage('Transfer completed successfully!', 'success');
+                    loadMyCards(); // Refresh cards
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error transferring money: ${error.message}`, 'error');
+            }
+        };
+
+        // Request card block
+        window.requestCardBlock = async function() {
+            const cardId = document.getElementById('blockCardId').value;
+            
+            try {
+                const response = await apiCall(`/api/card-requests/block/${cardId}`, {
+                    method: 'POST'
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showMessage(data.message, 'success');
+                } else {
+                    const error = await response.json();
+                    showMessage(`Error: ${error.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`Error requesting block: ${error.message}`, 'error');
+            }
+        };
+
+        // Show message helper
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // Set default expiry date
+        document.getElementById('createExpiry').value = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    </script>
+</body>
+</html>
+
+
